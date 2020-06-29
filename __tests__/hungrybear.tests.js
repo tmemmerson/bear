@@ -26,5 +26,16 @@ describe('Fuzzy Wuzzy', ()=>{
   test('should get very hungry if the food level drops below zero', function(){
     fuzzy.foodLevel = 0;
     expect(fuzzy.didYouGetEaten()).toEqual(true);
-  })
-});
+  });
+
+  test('should get very hungry if 10 seconds pass without feeding', function() {
+    jest.advanceTimersByTime(10001);
+    expect(fuzzy.didYouGetEaten()).toEqual(true);
+  });
+
+  test('should have a food level of ten if it is fed', function() {
+    jest.advanceTimersByTime(9001);
+    fuzzy.feed();
+    expect(fuzzy.foodLevel).toEqual(10);
+  });
+})
