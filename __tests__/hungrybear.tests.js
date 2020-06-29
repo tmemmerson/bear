@@ -38,4 +38,16 @@ describe('Fuzzy Wuzzy', ()=>{
     fuzzy.feed();
     expect(fuzzy.foodLevel).toEqual(10);
   });
+
+  test('should prevent player from feeding if they got ate', ()=>{
+    fuzzy.foodLevel = 0;
+    fuzzy.feed();
+    expect(fuzzy.foodLevel).toEqual(0);
+  });
+
+  test('should prevent player from feeding if the timer runs out', ()=>{
+    jest.advanceTimersByTime(10001);
+    fuzzy.feed();
+    expect(fuzzy.foodLevel).toEqual(0);
+  });
 })
